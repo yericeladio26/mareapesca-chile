@@ -1,48 +1,48 @@
 <!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MareaPesca Chile</title>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#075476"><title>MareaPesca Chile · v0.4</title>
 <style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#153248;background:#edf5f8}*{box-sizing:border-box}body{margin:0}header{background:#075476;color:white;padding:22px 16px}main{max-width:900px;margin:auto;padding:18px 12px}.panel{background:white;border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 2px 10px #1232}h1{margin:0;font-size:1.7rem}h2{font-size:1.2rem;margin:0 0 12px}label{display:block;font-weight:650;margin:12px 0 5px}select,input,button{font:inherit;width:100%;padding:11px;border:1px solid #a4bac7;border-radius:9px;background:white;color:#153248}button{background:#075476;color:white;border:0;margin-top:12px;cursor:pointer;font-weight:650}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.metric{background:#e9f3f8;padding:14px;border-radius:12px}.metric strong{display:block;font-size:1.3rem;margin-top:5px}.muted{color:#536b79;font-size:.91rem}.notice{border-left:4px solid #c07818;background:#fff4df;padding:12px;border-radius:7px}.ok{border-left:4px solid #137b67;background:#e6f7f1;padding:12px;border-radius:7px}table{width:100%;border-collapse:collapse}th,td{padding:9px 6px;text-align:left;border-bottom:1px solid #dce8ed}small{font-size:.85rem}#forecastTable{overflow-x:auto}footer{text-align:center;color:#536b79;padding:20px}
-</style>
-</head>
-<body>
-<header><div style="max-width:900px;margin:auto"><h1>🌊 MareaPesca Chile 🎣</h1><div>Planifica tu próxima salida de pesca</div></div></header>
-<main>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#153248;background:#edf5f8}*{box-sizing:border-box}body{margin:0}header{background:#075476;color:white;padding:23px 16px}header>div,main{max-width:900px;margin:auto}main{padding:18px 12px}h1{margin:0;font-size:1.7rem}h2{font-size:1.18rem;margin:0 0 12px}.panel{background:white;border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 2px 10px #1232}label{display:block;font-weight:650;margin:12px 0 5px}select,input,button{font:inherit;width:100%;padding:11px;border:1px solid #a4bac7;border-radius:9px;background:white;color:#153248}button{background:#075476;color:white;border:0;margin-top:12px;cursor:pointer;font-weight:650}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #e8a43c;outline-offset:2px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}.metric{background:#e9f3f8;padding:14px;border-radius:12px}.metric strong{display:block;font-size:1.3rem;margin-top:5px}.muted{color:#536b79;font-size:.91rem}.notice{border-left:4px solid #a56c16;background:#fff4df;padding:12px;border-radius:7px}.ok{border-left:4px solid #137b67;background:#e6f7f1;padding:12px;border-radius:7px}table{width:100%;border-collapse:collapse}th,td{padding:9px 6px;text-align:left;border-bottom:1px solid #dce8ed;white-space:nowrap}#forecastTable{overflow-x:auto}footer{text-align:center;color:#536b79;padding:20px}small{font-size:.85rem}.moon{display:flex;align-items:center;gap:16px}.moon-icon{font-size:3rem}p{line-height:1.5}
+</style></head><body>
+<header><div><h1>🌊 MareaPesca Chile 🎣</h1><div>Planifica tu próxima salida de pesca</div></div></header><main>
 <section class="panel"><h2>📍 Lugar y fecha</h2><div class="grid"><div><label for="region">Región</label><select id="region"></select></div><div><label for="sector">Sector</label><select id="sector"></select></div><div><label for="fecha">Fecha</label><input id="fecha" type="date"></div><div><label for="hora">Hora</label><input id="hora" type="time" value="08:00"></div></div><button id="consultar">Consultar pronóstico</button><p class="muted" id="ubicacion"></p></section>
-<section class="panel"><h2>🌊 Mareas previstas</h2><div class="notice"><strong>Predicción de mareas aún no conectada.</strong><p>Los horarios de pleamar, bajamar y alturas se mostrarán aquí cuando validemos una fuente de mareas autorizada y adecuada para cada sector. No utilices esta pantalla para decidir si es seguro ingresar a roqueríos.</p></div></section>
-<section class="panel"><h2>🌤️ Pronóstico del tiempo</h2><p id="estadoTiempo" class="muted">Selecciona un lugar, fecha y hora y pulsa Consultar pronóstico.</p><div id="tiempo" class="grid"></div></section>
-<section class="panel"><h2>🌊 Pronóstico de oleaje</h2><p id="estadoMar" class="muted">Esperando consulta.</p><div id="mar" class="grid"></div></section>
+<section class="panel"><h2>🌙 Fase lunar</h2><div id="luna" class="moon" aria-live="polite"></div><p class="muted">Fase calculada de manera aproximada para la fecha elegida. No equivale a una predicción de mareas.</p></section>
+<section class="panel"><h2>🌊 Mareas previstas</h2><div class="notice"><strong>Predicciones de mareas todavía no conectadas.</strong><p>Estamos evaluando una fuente confiable para mostrar pleamares, bajamares y alturas. No se presentan valores inventados. Nunca uses esta pantalla como única referencia de seguridad en roqueríos.</p></div></section>
+<section class="panel"><h2>🌤️ Pronóstico del tiempo</h2><p id="estadoTiempo" class="muted" aria-live="polite">Selecciona lugar, fecha y hora y pulsa Consultar pronóstico.</p><div id="tiempo" class="grid"></div></section>
+<section class="panel"><h2>🌊 Pronóstico de oleaje</h2><p id="estadoMar" class="muted" aria-live="polite">Esperando consulta.</p><div id="mar" class="grid"></div></section>
 <section class="panel"><h2>🕒 Evolución por horas</h2><div id="forecastTable"><p class="muted">Aparecerá el pronóstico disponible para el día seleccionado.</p></div></section>
-<section class="panel"><h2>⚠️ Seguridad</h2><p>Los pronósticos son estimaciones, no observaciones en tiempo real. Antes de pescar desde roqueríos, consulta los avisos marítimos oficiales de DIRECTEMAR y observa las condiciones del lugar. Una marea baja no garantiza oleaje seguro.</p></section>
-</main><footer>MareaPesca Chile · Prototipo 0.3 · Datos meteorológicos: Open-Meteo</footer>
+<section class="panel"><h2>⚠️ Seguridad</h2><p>Los pronósticos son estimaciones de modelos, no mediciones en tiempo real. Consulta los avisos marítimos oficiales de DIRECTEMAR y observa el lugar antes de pescar. Una marea baja no garantiza oleaje seguro.</p></section>
+</main><footer>MareaPesca Chile · Prototipo v0.4 · Clima y mar: Open-Meteo · Fase lunar: cálculo aproximado</footer>
 <script>
+'use strict';
 const zonas={
 'Antofagasta':[['Antofagasta',-23.65,-70.40],['La Portada',-23.50,-70.43],['Chacaya',-22.96,-70.31],['Mejillones',-23.10,-70.45],['Juan López',-23.51,-70.55],['Caleta Constitución',-23.40,-70.58],['Tocopilla',-22.09,-70.20],['Taltal',-25.40,-70.49],['Paposo',-25.02,-70.47],['Hornitos',-22.92,-70.30],['Cobija',-22.56,-70.26],['Caleta Coloso',-23.76,-70.47]],
 'Tarapacá':[['Iquique',-20.22,-70.15],['Playa Cavancha',-20.24,-70.15],['Chanavayita',-20.70,-70.19],['Pisagua',-19.60,-70.22]],
 'Atacama':[['Caldera',-27.07,-70.82],['Bahía Inglesa',-27.11,-70.86],['Chañaral',-26.35,-70.62],['Huasco',-28.47,-71.22]]};
-// Coordenadas aproximadas para el prototipo; validar antes de publicación definitiva.
+// Coordenadas aproximadas: validar antes de una publicación definitiva.
 const $=id=>document.getElementById(id),region=$('region'),sector=$('sector');
 for(const r of Object.keys(zonas))region.add(new Option(r,r));
-function cargarSectores(){sector.innerHTML='';for(const z of zonas[region.value])sector.add(new Option(z[0],z[0]));if(region.value==='Antofagasta')sector.value='Chacaya';}
+function cargarSectores(){sector.replaceChildren();for(const z of zonas[region.value])sector.add(new Option(z[0],z[0]));if(region.value==='Antofagasta')sector.value='Chacaya'}
 region.addEventListener('change',cargarSectores);cargarSectores();
-const hoy=new Date();const local=new Date(hoy.getTime()-hoy.getTimezoneOffset()*60000).toISOString().slice(0,10);$('fecha').value=local;
-function metric(t,v){return `<div class="metric"><small>${t}</small><strong>${v}</strong></div>`}
-function val(x,u=''){return x===null||x===undefined?'Sin dato':`${x} ${u}`}
-function hourIndex(times,fecha,hora){const target=fecha+'T'+hora.slice(0,2)+':00';return times.indexOf(target)}
-async function json(url){const res=await fetch(url);if(!res.ok)throw Error('HTTP '+res.status);return res.json()}
+const localDate=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Santiago',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());$('fecha').value=localDate;
+const val=(x,u='')=>x==null?'Sin dato':`${x}${u?' '+u:''}`;
+function metric(t,v){const d=document.createElement('div');d.className='metric';const s=document.createElement('small'),b=document.createElement('strong');s.textContent=t;b.textContent=v;d.append(s,b);return d}
+function fillMetrics(id,entries){$(id).replaceChildren(...entries.map(([a,b])=>metric(a,b)))}
+function moonPhase(date){const day=new Date(date+'T12:00:00Z');const known=new Date('2000-01-06T18:14:00Z');const cycle=29.530588853;const age=((day-known)/86400000%cycle+cycle)%cycle;const idx=Math.floor((age/cycle*8)+0.5)%8;const labels=['Luna nueva','Luna creciente','Cuarto creciente','Gibosa creciente','Luna llena','Gibosa menguante','Cuarto menguante','Luna menguante'];const icons=['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];return {name:labels[idx],icon:icons[idx],age:age.toFixed(1)}}
+function updateMoon(){if(!$('fecha').value)return;const m=moonPhase($('fecha').value);$('luna').replaceChildren();const icon=document.createElement('span');icon.className='moon-icon';icon.textContent=m.icon;icon.setAttribute('aria-hidden','true');const detail=document.createElement('div'),title=document.createElement('strong'),age=document.createElement('div');title.textContent=m.name;age.className='muted';age.textContent=`Edad lunar aproximada: ${m.age} días`;detail.append(title,age);$('luna').append(icon,detail)}
+$('fecha').addEventListener('change',updateMoon);updateMoon();
+async function json(url){const res=await fetch(url);if(!res.ok)throw new Error('HTTP '+res.status);return res.json()}
+function hourIndex(times,fecha,hora){return times.indexOf(fecha+'T'+hora.slice(0,2)+':00')}
+function renderTable(h){const table=document.createElement('table'),head=document.createElement('thead'),body=document.createElement('tbody');const tr=document.createElement('tr');for(const name of ['Hora','Temp.','Lluvia (%)','Viento']){const th=document.createElement('th');th.textContent=name;tr.append(th)}head.append(tr);for(let k=0;k<h.time.length;k+=3){const row=document.createElement('tr');for(const value of [h.time[k].slice(11),val(h.temperature_2m[k],'°C'),val(h.precipitation_probability[k],'%'),val(h.wind_speed_10m[k],'km/h')]){const td=document.createElement('td');td.textContent=value;row.append(td)}body.append(row)}table.append(head,body);$('forecastTable').replaceChildren(table)}
+let requestId=0;
 $('consultar').addEventListener('click',async()=>{
-const z=zonas[region.value].find(x=>x[0]===sector.value),fecha=$('fecha').value,hora=$('hora').value;
-if(!fecha||!hora){alert('Selecciona fecha y hora');return}
-$('ubicacion').textContent=`${z[0]}, Región de ${region.value} · Coordenadas aproximadas ${z[1]}, ${z[2]}`;
-$('estadoTiempo').textContent='Consultando datos meteorológicos…';$('estadoMar').textContent='Consultando oleaje…';$('tiempo').innerHTML='';$('mar').innerHTML='';$('forecastTable').innerHTML='';
+const id=++requestId,z=zonas[region.value].find(x=>x[0]===sector.value),fecha=$('fecha').value,hora=$('hora').value;if(!fecha||!hora){alert('Selecciona fecha y hora');return}
+$('ubicacion').textContent=`${z[0]}, Región de ${region.value} · Coordenadas aproximadas: ${z[1]}, ${z[2]}`;
+$('estadoTiempo').textContent='Consultando datos meteorológicos…';$('estadoMar').textContent='Consultando oleaje…';$('tiempo').replaceChildren();$('mar').replaceChildren();$('forecastTable').textContent='Esperando pronóstico…';
 const base=`latitude=${z[1]}&longitude=${z[2]}&timezone=America%2FSantiago&start_date=${fecha}&end_date=${fecha}`;
-const weather=`https://api.open-meteo.com/v1/forecast?${base}&hourly=temperature_2m,precipitation_probability,precipitation,wind_speed_10m,wind_gusts_10m,weather_code&wind_speed_unit=kmh`;
+const weather=`https://api.open-meteo.com/v1/forecast?${base}&hourly=temperature_2m,precipitation_probability,precipitation,wind_speed_10m,wind_gusts_10m&wind_speed_unit=kmh`;
 const marine=`https://marine-api.open-meteo.com/v1/marine?${base}&hourly=wave_height,wave_direction,wave_period,swell_wave_height`;
-const [w,m]=await Promise.allSettled([json(weather),json(marine)]);
-if(w.status==='fulfilled'&&w.value.hourly){const h=w.value.hourly,i=hourIndex(h.time,fecha,hora);if(i<0){$('estadoTiempo').textContent='No hay pronóstico disponible para esa fecha y hora.'}else{$('estadoTiempo').textContent=`Pronóstico estimado para ${fecha} a las ${hora} (hora de Chile).`;$('tiempo').innerHTML=metric('Temperatura',val(h.temperature_2m[i],'°C'))+metric('Probabilidad de precipitación',val(h.precipitation_probability[i],'%'))+metric('Precipitación',val(h.precipitation[i],'mm'))+metric('Viento',val(h.wind_speed_10m[i],'km/h'))+metric('Ráfagas',val(h.wind_gusts_10m[i],'km/h'));let rows='<table><thead><tr><th>Hora</th><th>Temp.</th><th>Lluvia</th><th>Viento</th></tr></thead><tbody>';for(let k=0;k<h.time.length;k+=3){rows+=`<tr><td>${h.time[k].slice(11)}</td><td>${val(h.temperature_2m[k],'°C')}</td><td>${val(h.precipitation_probability[k],'%')}</td><td>${val(h.wind_speed_10m[k],'km/h')}</td></tr>`}rows+='</tbody></table>';$('forecastTable').innerHTML=rows}}else $('estadoTiempo').textContent='Pronóstico no disponible para la fecha elegida o conexión bloqueada.';
-if(m.status==='fulfilled'&&m.value.hourly){const h=m.value.hourly,i=hourIndex(h.time,fecha,hora);if(i<0)$('estadoMar').textContent='Sin datos marinos para esa fecha.';else{$('estadoMar').textContent='Estimación de modelo marino. Puede ser imprecisa junto a la costa.';$('mar').innerHTML=metric('Altura de ola',val(h.wave_height[i],'m'))+metric('Dirección de ola',val(h.wave_direction[i],'°'))+metric('Período de ola',val(h.wave_period[i],'s'))+metric('Altura de mar de fondo',val(h.swell_wave_height[i],'m'))}}else $('estadoMar').textContent='Datos marinos no disponibles para esa fecha o sector.';
+const [w,m]=await Promise.allSettled([json(weather),json(marine)]);if(id!==requestId)return;
+if(w.status==='fulfilled'&&w.value.hourly){const h=w.value.hourly,i=hourIndex(h.time,fecha,hora);if(i<0){$('estadoTiempo').textContent='No hay pronóstico disponible para esa fecha y hora.';$('forecastTable').textContent='Sin datos horarios disponibles.'}else{$('estadoTiempo').textContent=`Pronóstico estimado para ${fecha} a las ${hora} (hora local de Chile).`;fillMetrics('tiempo',[['Temperatura',val(h.temperature_2m[i],'°C')],['Probabilidad de lluvia',val(h.precipitation_probability[i],'%')],['Precipitación',val(h.precipitation[i],'mm')],['Viento',val(h.wind_speed_10m[i],'km/h')],['Ráfagas',val(h.wind_gusts_10m[i],'km/h')]]);renderTable(h)}}else{$('estadoTiempo').textContent='Pronóstico no disponible: fecha fuera de cobertura, sector sin datos o error de conexión.';$('forecastTable').textContent='Sin datos horarios disponibles.'}
+if(m.status==='fulfilled'&&m.value.hourly){const h=m.value.hourly,i=hourIndex(h.time,fecha,hora);if(i<0)$('estadoMar').textContent='Sin datos marinos para esa fecha u hora.';else{$('estadoMar').textContent='Estimación de modelo marino. Puede ser imprecisa junto a la costa.';fillMetrics('mar',[['Altura de ola',val(h.wave_height[i],'m')],['Dirección de ola',val(h.wave_direction[i],'°')],['Período de ola',val(h.wave_period[i],'s')],['Altura de mar de fondo',val(h.swell_wave_height[i],'m')]])}}else $('estadoMar').textContent='Datos marinos no disponibles para esa fecha o sector.';
 });
-</script>
-</body></html>
+</script></body></html>
